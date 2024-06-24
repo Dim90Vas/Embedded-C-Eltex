@@ -1,3 +1,17 @@
 /*Найти количество единиц в двоичном представлении целого
 положительного числа (число вводится с клавиатуры).*/
+#include "stdio.h"
+int main() {
+  unsigned int a, b;
+  unsigned char i=0;
+  scanf("%d", &a);
+  while(a>0) {                          
+    b=a>>1;
+    if((a-(b<<1))==1)
+      i++;
+    a=a>>1;
+  }
+  printf("%d",i);
+  return 0;
+}
 
