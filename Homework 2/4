@@ -5,3 +5,49 @@
 15 24 25 20 7
 14 23 22 21 8
 13 12 11 10 9*/
+int main() { 
+    int n, m, k=1,x=0;
+    cin >> n >> m;
+    int a[n][m] = {-1};
+
+if (n==1||m==1) {
+    for (int i=0; i < n; i++) {
+        for (int j=0; j < m; j++) {
+            a[i][j] = k;
+            k++;
+        }
+    }
+} else {
+    while (n*m >= x) {
+    for (int i=x; i<n-x; i++) {
+        for (int j=x; j<m-x; j++) {
+            if (i==x) {
+                if(n*m<k) break;
+                a[i][j] = k;
+                k++;
+            } else if (j==m-1-x) {
+                if(n*m<k) break;
+                a[i][j] = k;
+                k++;
+            }
+             
+        } 
+    }
+    k--;
+    for (int i=n-1-x; i>x; i--) {
+        for (int j=m-1-x; j>x-1; j--) {
+            if (i==n-1-x) {
+                if(n*m<k) break;
+                a[i][j] = k;
+                k++;
+            } else if (j==x) {
+                if(n*m<k) break;
+                a[i][j] = k;
+                k++;
+            }
+            
+        } 
+    }
+    x++;
+    }
+}
