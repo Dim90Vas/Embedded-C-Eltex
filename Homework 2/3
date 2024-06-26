@@ -3,3 +3,28 @@
 0 0 1
 0 1 1
 1 1 1*/
+#include "stdio.h"
+#define N 3
+int main() { 
+  int array[N][N];
+  for(int i=0;i<N;++i) {
+    for(int j=0;j<N;++j) { 
+      array[i][j]=1;
+    }
+  }
+  for(int i=N-1;i>=0;--i) {
+    for(int j=0;j<N;++j) {   
+      if(i==N-1-j) {
+        break;
+      }
+      array[i][j]=0;
+    }
+  }
+  for(int i=0;i<N;++i) {
+    for(int j=0;j<N;++j) { 
+      printf("%d ",array[i][j]);
+    }
+    printf("\n");
+  }
+  return 0;
+}
