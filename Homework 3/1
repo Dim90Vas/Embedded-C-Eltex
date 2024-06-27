@@ -1,0 +1,13 @@
+#include "stdio.h"
+int main() {
+  unsigned int a,b;
+  scanf("%d",&a);
+  scanf("%d",&b);
+  char *ptr=NULL;
+  ptr=(char*)&a;
+  ptr=ptr+2;
+  *ptr=b;
+  printf("%d\n",*ptr);
+  printf("%d\n",a);
+  return 0;
+}
