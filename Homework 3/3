@@ -1,0 +1,11 @@
+#include "stdio.h"
+#define N 10
+int main() {
+  int array[N]={1,2,3,4,5,6,7,8,9,10};
+  int *ptr=&array[0];
+  while(*ptr<=10) {
+    printf("%d ",*ptr);
+    ptr++;
+  }
+  return 0;
+}
