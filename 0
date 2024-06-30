@@ -8,72 +8,92 @@ int main() {
   };
   struct abonent array[100];
   char del_name[10]={0,0,0,0,0,0,0,0,0,0};
+  char search_name[10]={0,0,0,0,0,0,0,0,0,0};
   int d=2;//sizeof(array)/sizeof(array[0]);
   int action;
   int x=1;
   int count=0;
-  
-  int lenght_del_name;
-  int lenght_ar_name;
+  int count_show=0;
   
   while(x==1) {
     printf("\n1) Add a subscriber\n2) Delete a subscriber\n3) Search by name\n4) Display all\n5) Exit\n");
     printf("Please select an action ");
     scanf("%d", &action);
-    
+
     switch(action) {
       case 1: 
-        if(count<d) {
+          if(count<d && *array[count].name==0) {
           printf("Name: ");
-          scanf("%s", array[count].name);
+          scanf("%s",array[count].name);
           //printf("Second name: ");
           //scanf("%s", array[count].second_name);
           //printf("Telefone: ");
           //scanf("%s", array[count].tel);
           ++count;
-        } else {
-          printf("The phone book is full\n");
-        } 
+          } else {
+            printf("The phone book is full\n");
+          } 
+          count_show=count;
         break; 
 //---------------------------------------------------------- 
-      case 2: 
-        lenght_ar_name=0;
-        lenght_del_name=0;
-        printf("Enter name subscriber: "); 
-        scanf("%s",del_name);
+      case 2:   
+        int lenght_del_name=0;
+        int lenght_ar_name=0;
+        int number_sub=0;
+        printf("Enter name subscriber delete: "); 
+        scanf("%s",del_name);       
         for(int i=0;i<10;++i) {
-          if(*(del_name+i)!=0) {
-            ++lenght_ar_name;   
+          if(del_name[i]!=0) {
+            ++lenght_del_name;   
           }
         }
-        
-        /*for(int j=0;j<d;++j) {
-          while(*(del_name+lenght_del_name)==*(array[j].name+lenght_del_name)) {
-            ++lenght_del_name;
+        for(int j=0;j<d;++j) {
+          while(del_name[lenght_ar_name]==*(array[j].name+lenght_ar_name) && *(array[j].name+lenght_ar_name)!=0) {
+            ++lenght_ar_name;
           }
-        }*/
-        
-        //while() {
-        
-        //}
-        
-        printf("\n%d %d",lenght_ar_name,lenght_del_name);
-        printf("\n%s",array[0].name);
+          if(lenght_ar_name==lenght_del_name) {
+            number_sub=j;
+          } 
+          lenght_ar_name=0;
+        }
+        for(int i=0;i<10;++i) {
+          del_name[i]=0;
+          array[number_sub].name[i]=0;
+          count=0;
+        }
         break; 
  //----------------------------------------------------------      
-      case 3: printf("3\n"); 
+      case 3: 
+        printf("Subscriber search: "); 
+        scanf("%s",search_name);
+        for(int i=0;i<10;++i) {
+          if(search_name[i]!=0) {
+            ++lenght_del_name;   
+          }
+        }
+        for(int j=0;j<d;++j) {
+          while(search_name[lenght_ar_name]==*(array[j].name+lenght_ar_name) && *(array[j].name+lenght_ar_name)!=0) {
+            ++lenght_ar_name;
+          }
+          if(lenght_ar_name==lenght_del_name) {
+            number_sub=j;
+          } 
+          lenght_ar_name=0;
+        }
+        //for(int i=0;i<count_show;++i) {
+          printf("Name: %s\tSecond name: %s\tTelefone: %s\t\n",array[number_sub].name,array[number_sub].second_name,array[number_sub].tel);
+       // }
         break;
       case 4: 
-        for(int i=0;i<count;++i) {
+        for(int i=0;i<count_show;++i) {
           printf("Name: %s\tSecond name: %s\tTelefone: %s\t\n",array[i].name,array[i].second_name,array[i].tel);
         }
         break;
       case 5: x=2; 
         break;
-      //case 6: break;
       default: printf("Not correct\n");
     }
-     
+  
   }
   return 0;
 }
