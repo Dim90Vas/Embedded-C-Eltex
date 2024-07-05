@@ -1,0 +1,35 @@
+/*Напишите программу, которая ищет введенной строке (с клавиатуры)
+введенную подстроку (с клавиатуры) и возвращает указатель на начало
+подстроки, если подстрока не найдена в указатель записывается NULL.
+В качестве срок использовать статические массивы.*/
+#include "stdio.h"
+int main() {
+    char str[100];
+    char s_str[10]={0,0,0,0,0,0,0,0,0,0};
+    int l=0;
+    int m=0;
+    printf("Enter string: "); 
+    fgets(str,100,stdin); 
+    printf("Enter search string: "); 
+    fgets(s_str,10,stdin); 
+    for(int i=0;i<10;++i) {
+        if(*(s_str+i)!=0) {
+            l=i;   
+        }
+    }
+    int j=0;
+    while(m<100) {
+        if(*(s_str+j)==*(str+m)) {
+          ++j;
+          if(j==l) {
+            printf("%d\n",*(str+m-1));
+            break;
+          }
+        } else {
+          j=0;
+        }
+        ++m;
+    }
+          
+  return 0;
+}
