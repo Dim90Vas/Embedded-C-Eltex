@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 struct abonent {
-        char name[10];
-        char second_name[10];
-        char tel[10];
+    char name[10];
+    char second_name[10];
+    char tel[10];
 };
 
 void add_ab(struct abonent *,char count);
@@ -12,67 +12,69 @@ void find_ab(struct abonent *,char count);
 void all_enter(struct abonent *,char count);
 
 int main(void) {
-        struct abonent arr[100];
-        int action;
-        char x=1;
-        char count=0;
-        while(x==1) {
-                printf("1. Add a subscriber\n");
-                printf("2. Delete a subscriber\n");
-                printf("3. Find a subscriber\n");
-                printf("4. Show all\n");
-                printf("5. Close\n");
-                scanf("%d",&action);
-                switch(action) {
-                        case 1:
-                                add_ab(arr,count);
-                                ++count;
-                                break;
-                        case 2:
-                                del_ab(arr);
-                                break;
-                        case 3:
-                                find_ab(arr,count);
-                                break;
-                        case 4:
-                                all_enter(arr,count);
-                                break;
-                        case 5:
-                                x=2;
-                                break;
-                }
-        }
+    struct abonent arr[100];
+    int action;
+    char x=1;
+    char count=0;
+    while(x==1) {
+        printf("1. Add a subscriber\n");
+        printf("2. Delete a subscriber\n");
+        printf("3. Find a subscriber\n");
+        printf("4. Show all\n");
+        printf("5. Close\n");
+        scanf("%d",&action);
+        switch(action) {
+            case 1:
+                add_ab(arr,count);
+                ++count;
+                break;
+            case 2:
+                del_ab(arr);
+                break;
+            case 3:
+                find_ab(arr,count);
+                break;
+            case 4:
+                all_enter(arr,count);
+                break;
+            case 5:
+                x=2;
+                break;
+            }
+    }
 
-        return 0;
+    return 0;
 }
 
 void add_ab(struct abonent *arr,char count) {
-        printf("Enter name: ");
-        scanf("%s",(arr+count)->name);
+    printf("Enter name: ");
+    scanf("%s",(arr+count)->name);
 }
+
 void del_ab(struct abonent *arr) {
-        printf("2");
+    printf("2");
 }
 
 void find_ab(struct abonent *arr,char count) {
-        char find_name[10];
-        printf("Find name: ");
-        scanf("%s",find_name);
-        for(int k=0;k<count;++k) {
-                for(int i=0;i<strlen(find_name);++i) {
-
-                        if(find_name[i]==(arr+k)[i].name) {
-                                printf("%s\n",(arr+k)->name);
-                        }
-                }
-
+    char find_name[10];
+    printf("Find name: ");
+    scanf("%s",find_name);
+    //printf("%ld\n",strlen(find_name));
+    
+    for(int k=0;k<count;++k) {
+        for(int i=0;i<10;++i) {
+            if(find_name[i]==(arr+k)->name+i) {
+                printf("%s ",find_name[i]);
+                printf("%s ",(arr+k)->name+i);
+                printf("\n");
+            }
         }
-
+    }
+    
 }
 
 void all_enter(struct abonent *arr,char count) {
-        for(int i=0;i<count;++i) {
-                printf("%s\n",(arr+i)-> name);
-        }
+    for(int i=0;i<count;++i) {
+        printf("%s\n",(arr+i)-> name);
+    }
 }
-
