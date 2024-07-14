@@ -59,18 +59,18 @@ void find_ab(struct abonent *arr,char count) {
     char find_name[10];
     printf("Find name: ");
     scanf("%s",find_name);
-    //printf("%ld\n",strlen(find_name));
-    
-    for(int k=0;k<count;++k) {
-        for(int i=0;i<10;++i) {
-            if(find_name[i]==(arr+k)->name+i) {
-                printf("%s ",find_name[i]);
-                printf("%s ",(arr+k)->name+i);
-                printf("\n");
-            }
+    int len=strlen(find_name);
+    int t=0;
+    for(int i=0;i<2;++i) {
+        for(int j=0;j<10;++j) {
+            if(((arr+i)->name)[j]!=0&&find_name[j]==((arr+i)->name)[j]) {
+                t=j;
+                if(t+1==len) {
+                    printf("%s ",((arr+i)->name));
+                }
+            }    
         }
-    }
-    
+    }   
 }
 
 void all_enter(struct abonent *arr,char count) {
