@@ -8,7 +8,7 @@ struct abonent {
 
 void add_ab(struct abonent *,char count);
 void del_ab(struct abonent *);
-void find_ab(struct abonent *,char count);
+int *find_ab(struct abonent *,int *,char count);
 void all_enter(struct abonent *,char count);
 
 int main(void) {
@@ -32,7 +32,11 @@ int main(void) {
                 del_ab(arr);
                 break;
             case 3:
-                find_ab(arr,count);
+                int mass[10];
+                find_ab(arr,mass,count);
+                for(int i=0;i<10;++i) {
+                        printf("%s",(arr+mass[i])->name);
+                }
                 break;
             case 4:
                 all_enter(arr,count);
@@ -50,13 +54,12 @@ void add_ab(struct abonent *arr,char count) {
     printf("Enter name: ");
     scanf("%s",(arr+count)->name);
 }
-
 void del_ab(struct abonent *arr) {
     printf("2");
 }
-
-void find_ab(struct abonent *arr,char count) {
+int *find_ab(struct abonent *arr,int *mass,char count) {
     char find_name[10];
+    int index=0;
     printf("Find name: ");
     scanf("%s",find_name);
     int len=strlen(find_name);
@@ -65,16 +68,18 @@ void find_ab(struct abonent *arr,char count) {
         for(int j=0;j<10;++j) {
             if(((arr+i)->name)[j]!=0&&find_name[j]==((arr+i)->name)[j]) {
                 t=j;
-                if(t+1==len) {
-                    printf("%s ",((arr+i)->name));
+                if(t==len) {
+                    mass[index]=i;
+                    ++index;
                 }
-            }    
+            }
         }
-    }   
+    }
+    return mass;
 }
-
 void all_enter(struct abonent *arr,char count) {
     for(int i=0;i<count;++i) {
-        printf("%s\n",(arr+i)-> name);
+        printf("%s\n",(arr+i)->name);
     }
 }
+
