@@ -7,15 +7,18 @@ struct abonent {
 };
 
 void add_ab(struct abonent *,char count);
-void del_ab(struct abonent *);
+int del_ab(struct abonent *,char count);
 int* find_ab(struct abonent *,int *,char count);
 void all_enter(struct abonent *,char count);
 
 int main(void) {
-    struct abonent arr[10];
+    struct abonent arr[100];
     int action;
     char x=1;
-    char count=0;
+    char count=1;
+    for(int i=0;i<100;++i) {
+        (arr+i)->name[0]=0;
+    }
     while(x==1) {
         printf("1. Add a subscriber\n2. Delete a subscriber\n3. Find a subscriber\n4. Show all\n5. Close\n");
         scanf("%d",&action);
@@ -25,7 +28,17 @@ int main(void) {
                 ++count;
                 break;
             case 2:
-                del_ab(arr);
+                int p=del_ab(arr,count);
+                printf("%d\n",p);
+                int m=0;
+                while(m<count) {
+                    for(int i=0;i<count;++i) {
+                        if(m==p) {
+                            (arr+m)->name[i]=0;
+                        }
+                    }   
+                    ++m;
+                }
                 break;
             case 3:
                 static int mass[10];
@@ -35,7 +48,6 @@ int main(void) {
                     printf("%s\n",(arr+mass[i])->name);
                     ++i; 
                 } while(i<10&&mass[i]!=0);
-                printf("\n");
                 for(int i=0;i<10;++i) {
                    mass[i]=0;
                 }
@@ -48,24 +60,49 @@ int main(void) {
                 break;
             }
     }
-
     return 0;
 }
 
 void add_ab(struct abonent *arr,char count) {
-    printf("Enter name: ");
-    scanf("%s",(arr+count)->name);
+    for(int i=0;i<count;++i) {
+        
+        if((arr+i)->name[0]==0) {
+            printf("Enter name: ");
+            scanf("%s",(arr+i)->name);
+            
+            break;
+        }
+    }
 }
-void del_ab(struct abonent *arr) {
-    printf("2");
+
+int del_ab(struct abonent *arr,char count) {
+    char del_name[10];
+    int index;
+    int i=0;
+    printf("Delete name: ");
+    scanf("%s",del_name);
+    while(i<count) {
+        for(int j=0;j<10;++j) {
+            if(strlen(del_name)==strlen((arr+i)->name)) {
+                if(del_name[j]==((arr+i)->name)[j]&&((arr+i)->name)[j]!=0) {
+                    if(strlen(del_name)==j+1) {
+                        index=i;
+                        --count;
+                        return index;
+                    }
+                }
+            }
+        }
+        ++i;
+    }
 }
 
 int* find_ab(struct abonent *arr,int *mass,char count) {
     char find_name[10];
     int index=0;
+    int i=0;
     printf("Find name: ");
     scanf("%s",find_name);
-    int i=0;
     while(i<count) {
         for(int j=0;j<10;++j) {
             if(strlen(find_name)==strlen((arr+i)->name)) {
@@ -77,7 +114,6 @@ int* find_ab(struct abonent *arr,int *mass,char count) {
                 }
             }
         }
-        
         ++i;
     }
     return mass;
@@ -88,4 +124,3 @@ void all_enter(struct abonent *arr,char count) {
         printf("%s\n",(arr+i)->name);
     }
 }
-
