@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <string.h>
+struct abonent {
+    char name[10];
+    char second_name[10];
+    char tel[10];
+};
+
+void add_ab(struct abonent *,char count);
+int del_ab(struct abonent *,char count);
+int* find_ab(struct abonent *,int *,char count);
+void all_enter(struct abonent *,char count);
+
+int main(void) {
+    struct abonent arr[100];
+    int action;
+    char x=1;
+    char count=1;
+    for(int i=0;i<100;++i) {
+        (arr+i)->name[0]=0;
+    }
+    while(x==1) {
+        printf("1. Add a subscriber\n2. Delete a subscriber\n3. Find a subscriber\n4. Show all\n5. Close\n");
+        scanf("%d",&action);
+        switch(action) {
+            case 1:
+                add_ab(arr,count);
+                ++count;
+                break;
+            case 2:
+                int p=del_ab(arr,count);
+                printf("%d\n",p);
+                int m=0;
+                while(m<count) {
+                    for(int i=0;i<count;++i) {
+                        if(m==p) {
+                            (arr+m)->name[i]=0;
+                        }
+                    }   
+                    ++m;
+                }
+                break;
+            case 3:
+                static int mass[10];
+                find_ab(arr,mass,count);
+                int i=0;
+                do {
+                    printf("%s\n",(arr+mass[i])->name);
+                    ++i; 
+                } while(i<10&&mass[i]!=0);
+                for(int i=0;i<10;++i) {
+                   mass[i]=0;
+                }
+                break;
+            case 4:
+                all_enter(arr,count);
+                break;
+            case 5:
+                x=2;
+                break;
+            }
+    }
+    return 0;
+}
+
+void add_ab(struct abonent *arr,char count) {
+    for(int i=0;i<count;++i) {
+        
+        if((arr+i)->name[0]==0) {
+            printf("Enter name: ");
+            scanf("%s",(arr+i)->name);
+            
+            break;
+        }
+    }
+}
+
+int del_ab(struct abonent *arr,char count) {
+    char del_name[10];
+    int index;
+    int i=0;
+    printf("Delete name: ");
+    scanf("%s",del_name);
+    while(i<count) {
+        for(int j=0;j<10;++j) {
+            if(strlen(del_name)==strlen((arr+i)->name)) {
+                if(del_name[j]==((arr+i)->name)[j]&&((arr+i)->name)[j]!=0) {
+                    if(strlen(del_name)==j+1) {
+                        index=i;
+                        --count;
+                        return index;
+                    }
+                }
+            }
+        }
+        ++i;
+    }
+}
+
+int* find_ab(struct abonent *arr,int *mass,char count) {
+    char find_name[10];
+    int index=0;
+    int i=0;
+    printf("Find name: ");
+    scanf("%s",find_name);
+    while(i<count) {
+        for(int j=0;j<10;++j) {
+            if(strlen(find_name)==strlen((arr+i)->name)) {
+                if(find_name[j]==((arr+i)->name)[j]&&((arr+i)->name)[j]!=0) {
+                    if(strlen(find_name)==j+1) {
+                    mass[index]=i;
+                    ++index;
+                    }
+                }
+            }
+        }
+        ++i;
+    }
+    return mass;
+}
+
+void all_enter(struct abonent *arr,char count) {
+    for(int i=0;i<count;++i) {
+        printf("%s\n",(arr+i)->name);
+    }
+}
