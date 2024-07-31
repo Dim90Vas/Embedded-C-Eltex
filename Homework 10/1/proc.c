@@ -8,9 +8,11 @@ void main(void) {
 	pid_t pid;
 	int st;
 	printf("Process 1, pid=%d\n",getpid());
+	printf("Process 1, ppid=%d\n",getppid());
 	pid=fork();
 	if(pid==0) {
 		printf("Process 2, pid=%d\n",getpid());
+		printf("Process 2, ppid=%d\n",getppid());
 		printf("Process 2: end\n");
 	} else {
 		if(pid<0) printf("Cann't create process 2: error %d\n",pid);
@@ -18,5 +20,4 @@ void main(void) {
 		printf("Status = %d\n",WEXITSTATUS(st));
 		printf("Process 1: end\n");
 	}
-	//exit(0);
 }
