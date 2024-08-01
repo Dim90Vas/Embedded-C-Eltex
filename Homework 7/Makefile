@@ -1,5 +1,6 @@
-main: main.o
-	gcc main.o add.o sub.o mul.o div.o -o main
-
-main.o: main.c
-	gcc main.c add.c sub.c mul.c div.c -c -g
+rezult: main.c add.c sub.c mul.c div.c
+	gcc -c add.c sub.c mul.c div.c
+	ar rc libcalc.a add.o sub.o mul.o div.o  
+	ranlib libcalc.a
+	gcc -c main.c
+	gcc main.o -L. -lcalc -o rezult
