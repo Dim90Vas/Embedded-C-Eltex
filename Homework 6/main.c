@@ -16,7 +16,7 @@ int main(void) {
                 ++count;
                 break;
             case 2:
-                del_ab(people,count);
+                people=del_ab(people,count);
                 break;
             case 3:
                 static int mass[10];
