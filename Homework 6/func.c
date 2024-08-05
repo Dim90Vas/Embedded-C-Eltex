@@ -27,14 +27,13 @@ struct abonent* del_ab(struct abonent *arr,char count) {
         	++i;
     	}
     	--count;
-    	struct abonent *new_arr=realloc(arr,(count*sizeof(struct abonent)));
+    	struct abonent *new_arr=realloc(arr,count*sizeof(struct abonent));
     	for(int j=0;j<count;++j,++k) {
     		strcpy((new_arr+j)->name,(arr+k)->name);
     		if(j==index) {
     			++k;
     			strcpy((new_arr+j)->name,(arr+k)->name);			
     		}
-
     	}
     	return new_arr;
 }

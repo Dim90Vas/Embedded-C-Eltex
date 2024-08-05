@@ -1,13 +1,12 @@
 #include "header.h"
 
 int main(void) {
-    struct abonent *people = (struct abonent *)malloc(1*sizeof(struct abonent));
     int action;
     char x=1;
     char count=1;
-    for(int i=0;i<100;++i) {
-        (people+i)->name[0]=0;
-    }
+    struct abonent *people = (struct abonent *)malloc(count*sizeof(struct abonent));
+    memset(people,0,count*sizeof(struct abonent));
+
     while(x==1) {
         printf("1. Add a subscriber\n2. Delete a subscriber\n3. Find a subscriber\n4. Show all\n5. Close\n");
         scanf("%d",&action);
@@ -18,16 +17,6 @@ int main(void) {
                 break;
             case 2:
                 del_ab(people,count);
-                /*printf("%d\n",p);
-                int m=0;
-                while(m<count) {
-                    for(int i=0;i<count;++i) {
-                        if(m==p) {
-                            (people+m)->name[i]=0;
-                        }
-                    }   
-                    ++m;
-                }*/
                 break;
             case 3:
                 static int mass[10];
